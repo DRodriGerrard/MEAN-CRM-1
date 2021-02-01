@@ -5,60 +5,46 @@ module.exports = {getAll, getOneById, createOne, putOne, patchOne, removeOne};
 
 function getAll(req, res) {
   return customerModel.find()
-    .then(customers => {
-      return res.json(customers);
-    })
-    .catch(err => {
-      res.status(500).json(err)
-    })
+    .then(customers =>  res.json(customers))
+    .catch(err => res.status(500).json(err))
 }
 
 function getOneById(req, res) {
-  return customerModel.find()
-    .then(customers => {
-      return res.json(customers);
-    })
-    .catch(err => {
-      return res.json(err);
-    })
+  const customerId = req.params.id ;
+  return customerModel.findById(customerId)
+    .then(customer => res.json(customer) )
+    .catch(err => res.status(500).json(err) )
 }
 
 function createOne(req, res) {
-  return customerModel.find()
-    .then(customers => {
-      return res.json(customers);
-    })
-    .catch(err => {
-      return res.json(err);
-    })
+  return customerModel.create(req.body)
+    .then(newCustomer => res.json(newCustomer))
+    .catch(err => res.status(500).json(err))
 }
 
-function putOne(req, res) {
-  return customerModel.find()
-    .then(customers => {
-      return res.json(customers);
-    })
-    .catch(err => {
-      return res.json(err);
-    })
+async function putOne(req, res) {
+  try {
+    const customerId = req.params.id;
+    const edited = await customerModel.findOneById(customerId).updateOne(req.body);
+    return res.json(edited);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 }
 
-function patchOne(req, res) {
-  return customerModel.find()
-    .then(customers => {
-      return res.json(customers);
-    })
-    .catch(err => {
-      return res.json(err);
-    })
+async function patchOne(req, res) {
+  try {
+    const customerId = req.params.id;
+    const edited = await customerModel.findOneById(customerId).updateOne(req.body);
+    return res.json(edited);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 }
 
 function removeOne(req, res) {
-  return customerModel.find()
-    .then(customers => {
-      return res.json(customers);
-    })
-    .catch(err => {
-      return res.json(err);
-    })
+  const customerId = req.params.id;
+  return customerModel.findByIdAndRemove()
+    .then(customers =>  res.json(customers))
+    .catch(err => res.json(err))
 }
