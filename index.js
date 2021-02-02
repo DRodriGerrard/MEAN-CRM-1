@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const customersRouter = require('./api/customers/customers.router');
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 require('dotenv').config();
 
 mongoose.connect(`${process.env.MONGODB_host}://${process.env.MONGODB_user}:${process.env.MONGODB_password}@${process.env.MONGODB_cluster}`, { useNewUrlParser: true, useUnifiedTopology:  true });
