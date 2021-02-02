@@ -26,7 +26,8 @@ const customerSchema = mongoose.Schema({
     type: String,
     enum: ['VIP', 'Pago tardio', 'Es un Pesado']
   }]
-})
+},
+{ versionKey : false })
 
 function emailValid(email){
   return /^\S+@\S+\.\S+$/.test(email) 
