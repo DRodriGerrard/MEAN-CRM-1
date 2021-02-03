@@ -4,14 +4,14 @@ const customerModel = require('./customers.model');
 module.exports = {getAll, getOneById, createOne, putOne, patchOne, removeOne};
 
 function getAll(req, res) {
-  return customerModel.find()
+  return customerModel.find().populate('projects')
     .then(customers =>  res.json(customers))
     .catch(err => res.status(500).json(err))
 }
 
 function getOneById(req, res) {
   const customerId = req.params.id ;
-  return customerModel.findById(customerId)
+  return customerModel.findById(customerId).populate('projects')
     .then(customer => res.json(customer) )
     .catch(err => res.status(500).json(err) )
 }

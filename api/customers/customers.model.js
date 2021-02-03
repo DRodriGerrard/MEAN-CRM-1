@@ -19,7 +19,7 @@ const customerSchema = mongoose.Schema({
     require: false
   },
   projects: [{
-    ref: 'project',
+    ref: 'projects',
     type: mongoose.Schema.Types.ObjectId
   }],
   tags: [{
@@ -33,5 +33,5 @@ function emailValid(email){
   return /^\S+@\S+\.\S+$/.test(email) 
 }
 
-const customerModel = mongoose.model('customers', customerSchema);
+const customerModel = mongoose.model('customer', customerSchema);
 module.exports = customerModel;
