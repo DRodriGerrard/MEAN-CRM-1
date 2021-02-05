@@ -5,7 +5,7 @@ module.exports = {getAll, getOneById, createOne, putOne, patchOne, removeOne};
 
 function getAll(req, res) {
   return customerModel.find().populate('projects')
-    .then(customers =>  res.json(customers))
+    .then(customers => res.json(customers))
     .catch(err => res.status(500).json(err))
 }
 
@@ -45,6 +45,10 @@ async function patchOne(req, res) {
 function removeOne(req, res) {
   const customerId = req.params.id;
   return customerModel.findByIdAndRemove()
-    .then(customers =>  res.json(customers))
+    .then(customers => res.json(customers))
     .catch(err => res.json(err))
+}
+
+function handleErrors(errCode) {
+  console.log(errCode);
 }
